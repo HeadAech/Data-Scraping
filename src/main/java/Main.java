@@ -3,15 +3,19 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+//klasy do działania z plikami
+import java.io.File;
+import java.io.FileWriter;
+//
+
+
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.Scanner;
-import java.util.TreeMap;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         Document doc = null;
+
         try{
             doc = Jsoup.connect("https://apexlegends.gamepedia.com/Apex_Legends_Wiki").get();
         }
@@ -49,6 +53,8 @@ public class Main {
                 System.out.println(legendsData.get(legend));
                 cont = true;
             }
+            scan.close();
+
         }
     }
 

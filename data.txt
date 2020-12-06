@@ -1,0 +1,136 @@
+{bangalore=Legenda{
+ Pseudonim: Bangalore,
+ Imię i nazwisko: Anita Williams,
+ Płeć: Female,
+ Wiek: 38,
+ Waga: 180 lbs (82 kg),
+ Wzrost: 6'0" (183 cm),
+ Klasa: Offensive,
+ Pochodzenie: Gridiron
+}, bloodhound=Legenda{
+ Pseudonim: Bloodhound,
+ Imię i nazwisko: Unknown,
+ Płeć: Non-binary,
+ Wiek: Unknown,
+ Waga: null,
+ Wzrost: null,
+ Klasa: Recon,
+ Pochodzenie: Talos
+}, caustic=Legenda{
+ Pseudonim: Caustic,
+ Imię i nazwisko: Dr. Alexander Maxwell Nox,
+ Płeć: Male,
+ Wiek: 48,
+ Waga: null,
+ Wzrost: null,
+ Klasa: Defensive,
+ Pochodzenie: Gaea
+}, crypto=Legenda{
+ Pseudonim: Crypto,
+ Imię i nazwisko: Tae Joon Park (박태준),
+ Płeć: Male,
+ Wiek: 31,
+ Waga: 130 lbs (59 kg),
+ Wzrost: 5'9" (175 cm),
+ Klasa: Recon,
+ Pochodzenie: Gaea
+}, gibraltar=Legenda{
+ Pseudonim: Gibraltar,
+ Imię i nazwisko: Makoa Gibraltar,
+ Płeć: Male,
+ Wiek: 30,
+ Waga: 292 lbs (132 kg),
+ Wzrost: 6'5" (196 cm),
+ Klasa: Defensive,
+ Pochodzenie: Solace
+}, horizon=Legenda{
+ Pseudonim: Horizon,
+ Imię i nazwisko: Dr. Mary Somers,
+ Płeć: Female,
+ Wiek: 37,
+ Waga: null,
+ Wzrost: null,
+ Klasa: Offensive,
+ Pochodzenie: Psamathe
+}, lifeline=Legenda{
+ Pseudonim: Lifeline,
+ Imię i nazwisko: Ajay Che,
+ Płeć: Female,
+ Wiek: 24,
+ Waga: null,
+ Wzrost: null,
+ Klasa: Support,
+ Pochodzenie: Psamathe
+}, loba=Legenda{
+ Pseudonim: Loba,
+ Imię i nazwisko: Loba Andrade,
+ Płeć: Female,
+ Wiek: 34,
+ Waga: null,
+ Wzrost: null,
+ Klasa: Support,
+ Pochodzenie: None
+}, mirage=Legenda{
+ Pseudonim: Mirage,
+ Imię i nazwisko: Elliott R. Witt,
+ Płeć: Male,
+ Wiek: 30,
+ Waga: null,
+ Wzrost: 5'11",
+ Klasa: Offensive,
+ Pochodzenie: Solace
+}, octane=Legenda{
+ Pseudonim: Octane,
+ Imię i nazwisko: Octavio Silva,
+ Płeć: Male,
+ Wiek: 24,
+ Waga: null,
+ Wzrost: null,
+ Klasa: Offensive,
+ Pochodzenie: Psamathe
+}, pathfinder=Legenda{
+ Pseudonim: Pathfinder,
+ Imię i nazwisko: MRVN,
+ Płeć: Male,
+ Wiek: Unknown,
+ Waga: 937 lbs (425 kg),
+ Wzrost: 6'2" (188 cm),
+ Klasa: Recon,
+ Pochodzenie: Unknown
+}, rampart=Legenda{
+ Pseudonim: Rampart,
+ Imię i nazwisko: Ramya Parekh,
+ Płeć: Female,
+ Wiek: 21,
+ Waga: null,
+ Wzrost: null,
+ Klasa: Defensive,
+ Pochodzenie: Gaea
+}, revenant=Legenda{
+ Pseudonim: Revenant,
+ Imię i nazwisko: Unknown,
+ Płeć: Male,
+ Wiek: Unknown (as a human) 313 (as a simulacrum),
+ Waga: null,
+ Wzrost: 6'8" (203 cm)[1],
+ Klasa: Offensive,
+ Pochodzenie: Solace
+}, wattson=Legenda{
+ Pseudonim: Wattson,
+ Imię i nazwisko: Natalie Paquette,
+ Płeć: Female,
+ Wiek: 22,
+ Waga: null,
+ Wzrost: 5'6" (168 cm),
+ Klasa: Defensive,
+ Pochodzenie: Solace
+}, wraith=Legenda{
+ Pseudonim: Wraith,
+ Imię i nazwisko: Renee H. Blasey,
+ Płeć: Female,
+ Wiek: 32,
+ Waga: null,
+ Wzrost: 5'4" (163 cm),
+ Klasa: Offensive,
+ Pochodzenie: Typhon[1]
+}}
