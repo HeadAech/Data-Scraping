@@ -74,6 +74,7 @@ public class Main {
                         Image.SCALE_SMOOTH);
                 //
                 JButton btn = new JButton(new ImageIcon(dimg));
+                btn.setBackground(new Color(229, 225, 216));
 
                 btn.addActionListener(new ActionListener() {
                     @Override
@@ -87,14 +88,14 @@ public class Main {
                         dataContainer.setLayout(new GridLayout(0, 1));
                         ArrayList<JLabel> labels = new ArrayList<>();
 
-                        labels.add(new JLabel("Pseudonim: " + el.getValue().getNickname()));
-                        labels.add(new JLabel("Imię i nazwisko: " + el.getValue().getName()));
-                        labels.add(new JLabel("Płeć: " + el.getValue().getGender()));
-                        labels.add(new JLabel("Wiek: " + el.getValue().getAge()));
-                        labels.add(new JLabel("Waga: " + el.getValue().getWeight()));
-                        labels.add(new JLabel("Wzrost: " + el.getValue().getHeight()));
-                        labels.add(new JLabel("Klasa: " + el.getValue().getType()));
-                        labels.add(new JLabel("Pochodzenie: " + el.getValue().getHome_world()));
+                        labels.add(new JLabel("<html><div style='margin: 10px;'><b>Pseudonim:</b> " + el.getValue().getNickname() + "</div></html>"));
+                        labels.add(new JLabel("<html><div style='margin: 10px;'><b>Imię i nazwisko:</b> " + el.getValue().getName() + "</div></html>"));
+                        labels.add(new JLabel("<html><div style='margin: 10px;'><b>Płeć:</b> " + el.getValue().getGender() + "</div></html>"));
+                        labels.add(new JLabel("<html><div style='margin: 10px;'><b>Wiek:</b> " + el.getValue().getAge() + "</div></html>"));
+                        labels.add(new JLabel("<html><div style='margin: 10px;'><b>Waga:</b> " + el.getValue().getWeight() + "</div></html>"));
+                        labels.add(new JLabel("<html><div style='margin: 10px;'><b>Wzrost:</b> " + el.getValue().getHeight() + "</div></html>"));
+                        labels.add(new JLabel("<html><div style='margin: 10px;'><b>Klasa:</b> " + el.getValue().getType() + "</div></html>"));
+                        labels.add(new JLabel("<html><div style='margin: 10px;'><b>Pochodzenie:</b> " + el.getValue().getHome_world() + "</div></html>"));
 
                         for(JLabel label : labels){
                             label.setFont(new Font("Verdana", Font.PLAIN, 18));
@@ -102,8 +103,14 @@ public class Main {
                             dataContainer.add(label);
                         }
                         imageContainer.add(new JLabel(new ImageIcon(image)));
+
+                        legendInfoContainer.setBackground(new Color(229, 225, 216));
+                        dataContainer.setBackground(new Color(229, 225, 216));
+                        imageContainer.setBackground(new Color(229, 225, 216));
+
                         legendInfoContainer.add(dataContainer);
                         legendInfoContainer.add(imageContainer);
+
                         legendFrame.add(legendInfoContainer);
                         legendFrame.setPreferredSize(new Dimension(800, 600));
                         legendFrame.setBounds(100, 100, 800, 600);
