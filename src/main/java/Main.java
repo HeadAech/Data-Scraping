@@ -1,28 +1,125 @@
-import org.apache.poi.ss.formula.functions.T;
-import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+
 //klasy do działania z plikami
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.io.*;
 //
 
 
-import java.lang.reflect.Array;
+import java.net.URL;
 import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-//        jframeInit();
-//        readLegendData();
 
-        createExcelFile();
-        readExcelFile();
+        JFrame frame = new JFrame("Apex Legends Info");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setPreferredSize(new Dimension(1200, 800));
+        frame.setBounds(100, 100, 1200, 800);
+//        frame.setSize(1280,720);
+
+        Object[] options = {"Tak",
+                "Nie, wczytaj plik Excel"};
+        int n = JOptionPane.showOptionDialog(frame,
+                "Pobrać dane na nowo?",
+                "Synchronizacja danych",
+                JOptionPane.YES_NO_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[1]);
+
+        HashMap<String, Legend> legendsData = new HashMap<>();
+
+        if(n == 0){
+            ManageFile.createExcelFile(legendsData());
+        }
+        try{
+            legendsData = ManageFile.readExcelFile();
+        }
+        catch(FileNotFoundException e){
+            System.out.println("Wystąpił błąd: Nie znaleziono pliku, proszę zsynchronizować dane przy uruchomieniu programu." + e);
+            JOptionPane.showMessageDialog(frame,
+                    "Nie znaleziono pliku, proszę zsynchronizować dane przy uruchomieniu programu.",
+                    "Wystąpił błąd",
+                    JOptionPane.ERROR_MESSAGE);
+            System.exit(0);
+        }
+        System.out.println(legendsData);
+        Container container = frame.getContentPane();
+        frame.setLayout(new GridLayout(0, 3));
+
+        for (Map.Entry<String, Legend> el : legendsData.entrySet()){
+            try {
+                String path = el.getValue().getImage_src();
+                System.out.println("Get Image from " + path);
+                URL url = new URL(path);
+                BufferedImage image = ImageIO.read(url);
+                System.out.println("Load image into frame...");
+
+                //test
+
+                Image dimg = image.getScaledInstance(150, 150,
+                        Image.SCALE_SMOOTH);
+                //
+                JButton btn = new JButton(new ImageIcon(dimg));
+
+                btn.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        JFrame legendFrame = new JFrame();
+                        JPanel legendInfoContainer = new JPanel();
+                        JPanel dataContainer = new JPanel();
+                        JPanel imageContainer = new JPanel();
+
+                        legendInfoContainer.setLayout(new GridLayout(0, 2));
+                        dataContainer.setLayout(new GridLayout(0, 1));
+                        ArrayList<JLabel> labels = new ArrayList<>();
+
+                        labels.add(new JLabel("Pseudonim: " + el.getValue().getNickname()));
+                        labels.add(new JLabel("Imię i nazwisko: " + el.getValue().getName()));
+                        labels.add(new JLabel("Płeć: " + el.getValue().getGender()));
+                        labels.add(new JLabel("Wiek: " + el.getValue().getAge()));
+                        labels.add(new JLabel("Waga: " + el.getValue().getWeight()));
+                        labels.add(new JLabel("Wzrost: " + el.getValue().getHeight()));
+                        labels.add(new JLabel("Klasa: " + el.getValue().getType()));
+                        labels.add(new JLabel("Pochodzenie: " + el.getValue().getHome_world()));
+
+                        for(JLabel label : labels){
+                            label.setFont(new Font("Verdana", Font.PLAIN, 18));
+
+                            dataContainer.add(label);
+                        }
+                        imageContainer.add(new JLabel(new ImageIcon(image)));
+                        legendInfoContainer.add(dataContainer);
+                        legendInfoContainer.add(imageContainer);
+                        legendFrame.add(legendInfoContainer);
+                        legendFrame.setPreferredSize(new Dimension(800, 600));
+                        legendFrame.setBounds(100, 100, 800, 600);
+                        legendFrame.pack();
+                        legendFrame.setVisible(true);
+                    }
+                });
+
+                container.add(btn);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        frame.pack();
+        frame.setVisible(true);
     }
 
     private static Legend getLegendInfo(String name) throws IOException {
@@ -34,6 +131,8 @@ public class Main {
             System.out.println("Wystąpił błąd: " + e);
         }
         Element infobox = legendPage.getElementsByClass("infobox").first();
+        String img = infobox.select("img").first().attr("src");
+        System.out.println(img);
         Elements rows = infobox.getElementsByClass("infobox-row");
 
         Map<String, String> legendInfo = new TreeMap<>();
@@ -43,18 +142,10 @@ public class Main {
             String value = rows.get(i).getElementsByClass("infobox-row-value").first().text();
             legendInfo.put(head, value);
         }
-
-        return new Legend(legendInfo.get("Nickname"),legendInfo.get("Real Name"), legendInfo.get("Gender"), legendInfo.get("Age"), legendInfo.get("Weight"), legendInfo.get("Height"), legendInfo.get("Legend Type"), legendInfo.get("Home World"));
+        legendInfo.put("Image Src", img);
+        return new Legend(legendInfo.get("Nickname"),legendInfo.get("Real Name"), legendInfo.get("Gender"), legendInfo.get("Age"), legendInfo.get("Weight"), legendInfo.get("Height"), legendInfo.get("Legend Type"), legendInfo.get("Home World"), legendInfo.get("Image Src"));
     }
 
-    private static void jframeInit(){
-        JFrame frame = new JFrame("Apex Legends Info");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1280,720);
-        JButton button = new JButton("Press");
-        frame.getContentPane().add(button); // Adds Button to content pane of frame
-        frame.setVisible(true);
-    }
 
     public static Map<String, Legend> legendsData() throws IOException {
         Document doc = null;
@@ -82,97 +173,8 @@ public class Main {
             legendsData.put(legends.get(i).toLowerCase(), getLegendInfo(legends.get(i)));
         }
 
-        System.out.println(legendsData);
-
-        boolean cont = false;
-//        while (!cont){
-//            System.out.println(legends);
-//            System.out.println("O jakiej legendzie chcesz wyświetlić informacje?");
-//
-//            Scanner scan = new Scanner(System.in);
-//            String legend = scan.nextLine();
-//            legend = legend.toLowerCase();
-//            if(legendsData.get(legend)==null){
-//                System.out.println("Nie ma takiej legendy!");
-//            }else{
-//                System.out.println(legendsData.get(legend));
-//                cont = true;
-//            }
-//            scan.close();
-//
-//        }
         return legendsData;
     }
 
-    public static void createExcelFile() throws IOException {
-       Map<String, Legend> legendsData = legendsData();
-
-        //create blank workbook
-        XSSFWorkbook workbook = new XSSFWorkbook();
-
-        //Create a blank sheet
-        XSSFSheet sheet = workbook.createSheet("Legends.xlsx");
-
-        int rowCount = 0;
-        for (Map.Entry<String, Legend> el : legendsData.entrySet())
-        {
-            Row row = sheet.createRow(rowCount++);
-
-            ArrayList<String> legend = el.getValue().createArrayList();
-            int cellnum = 0;
-            for (String x : legend)
-            {
-                Cell cell = row.createCell(cellnum++);
-                cell.setCellValue(x);
-
-            }
-
-        }
-        try
-        {
-            //Write the workbook in file system
-            FileOutputStream out = new FileOutputStream(new File("Legends.xlsx"));
-            workbook.write(out);
-            out.close();
-            System.out.println("Legends.xlsx has been created successfully");
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-    }
-
-    private static void readExcelFile() throws IOException {
-        FileInputStream inputStream = new FileInputStream(new File("Legends.xlsx"));
-
-        Workbook workbook = new XSSFWorkbook(inputStream);
-        Sheet firstSheet = workbook.getSheetAt(0);
-        Iterator<Row> iterator = firstSheet.iterator();
-
-        while (iterator.hasNext()) {
-            Row nextRow = iterator.next();
-            Iterator<Cell> cellIterator = nextRow.cellIterator();
-
-            while (cellIterator.hasNext()) {
-                Cell cell = cellIterator.next();
-
-                switch (cell.getCellType()) {
-                    case Cell.CELL_TYPE_STRING:
-                        System.out.print(cell.getStringCellValue());
-                        break;
-                    case Cell.CELL_TYPE_BOOLEAN:
-                        System.out.print(cell.getBooleanCellValue());
-                        break;
-                    case Cell.CELL_TYPE_NUMERIC:
-                        System.out.print(cell.getNumericCellValue());
-                        break;
-                }
-                System.out.print(" - ");
-            }
-            System.out.println();
-        }
-
-        inputStream.close();
-    }
 
 }

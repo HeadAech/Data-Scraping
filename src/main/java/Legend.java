@@ -1,4 +1,3 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Legend {
@@ -10,8 +9,9 @@ public class Legend {
     private String height;
     private String type;
     private String home_world;
+    private String image_src;
 
-    public Legend(String nickname, String name, String gender, String age, String weight, String height, String type, String home_world){
+    public Legend(String nickname, String name, String gender, String age, String weight, String height, String type, String home_world, String image_src){
         this.nickname = nickname;
         this.name = name;
         this.gender = gender;
@@ -20,6 +20,7 @@ public class Legend {
         this.height = height;
         this.type = type;
         this.home_world = home_world;
+        this.image_src = image_src;
     }
 
     @Override
@@ -32,7 +33,8 @@ public class Legend {
                 ",\n Waga: " + weight +
                 ",\n Wzrost: " + height +
                 ",\n Klasa: " + type  +
-                ",\n Pochodzenie: " + home_world  +'\n' +
+                ",\n Pochodzenie: " + home_world  +
+                ",\n Zdjęcie: " + image_src  +'\n' +
                 '}';
     }
 
@@ -96,6 +98,10 @@ public class Legend {
         return home_world;
     }
 
+    public String getImage_src() {
+        return image_src;
+    }
+
     public void setHome_world(String home_world) {
         this.home_world = home_world;
     }
@@ -111,18 +117,9 @@ public class Legend {
         arr.add(height);
         arr.add(type);
         arr.add(home_world);
+        arr.add(image_src);
 
         return arr;
     }
-
-    public ArrayList<String> getElementsOfLegend(){
-        ArrayList<String> arr = new ArrayList<>();
-
-        arr.add("nickname");
-        arr.add("name");
-        arr.add("gender");
-        return arr;
-    }
-
 
 }
