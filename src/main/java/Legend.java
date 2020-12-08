@@ -1,3 +1,6 @@
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class Legend {
     private String nickname;
     private String name;
@@ -96,4 +99,30 @@ public class Legend {
     public void setHome_world(String home_world) {
         this.home_world = home_world;
     }
+
+    public ArrayList<String> createArrayList(){
+        ArrayList<String> arr = new ArrayList<String>();
+
+        arr.add(nickname);
+        arr.add(name);
+        arr.add(gender);
+        arr.add(age);
+        arr.add(weight);
+        arr.add(height);
+        arr.add(type);
+        arr.add(home_world);
+
+        return arr;
+    }
+
+    public ArrayList<String> getElementsOfLegend(){
+        ArrayList<String> arr = new ArrayList<>();
+
+        arr.add("nickname");
+        arr.add("name");
+        arr.add("gender");
+        return arr;
+    }
+
+
 }
