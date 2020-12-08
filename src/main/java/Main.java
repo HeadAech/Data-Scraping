@@ -79,7 +79,7 @@ public class Main {
                 btn.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        JFrame legendFrame = new JFrame();
+                        JFrame legendFrame = new JFrame(el.getValue().getNickname());
                         JPanel legendInfoContainer = new JPanel();
                         JPanel dataContainer = new JPanel();
                         JPanel imageContainer = new JPanel();
