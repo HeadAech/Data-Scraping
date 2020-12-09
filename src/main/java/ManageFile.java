@@ -18,10 +18,7 @@ public class ManageFile {
 
     public static void createExcelFile(Map<String, Legend> legendsData) throws IOException {
 
-        //create blank workbook
         XSSFWorkbook workbook = new XSSFWorkbook();
-
-        //Create a blank sheet
         XSSFSheet sheet = workbook.createSheet("Legends.xlsx");
 
         int rowCount = 0;
@@ -39,11 +36,10 @@ public class ManageFile {
         }
         try
         {
-            //Write the workbook in file system
             FileOutputStream out = new FileOutputStream(new File("Legends.xlsx"));
             workbook.write(out);
             out.close();
-            System.out.println("Legends.xlsx has been created successfully");
+            System.out.println("Legends.xlsx został utworzony pomyślnie");
         }
         catch (Exception e)
         {
@@ -68,10 +64,9 @@ public class ManageFile {
                 Cell cell = cellIterator.next();
 
                 legend.add(cell.getStringCellValue());
-//                System.out.println(cell.getStringCellValue());
-//                System.out.print(" ; ");
+
             }
-//            System.out.println();
+
 
             Legend l = new Legend(legend.get(0), legend.get(1), legend.get(2), legend.get(3), legend.get(4), legend.get(5), legend.get(6), legend.get(7), legend.get(8));
 
