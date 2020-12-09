@@ -1,10 +1,7 @@
-
-
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-
 
 //klasy do działania z plikami
 import javax.imageio.ImageIO;
@@ -16,7 +13,6 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 //
 
-
 import java.net.URL;
 import java.util.*;
 
@@ -26,6 +22,7 @@ public class Main {
         JFrame frame = new JFrame("Apex Legends Info");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setPreferredSize(new Dimension(1200, 800));
+        frame.setMinimumSize(new Dimension(1200, 800));
         frame.setBounds(100, 100, 1200, 800);
 
         Object[] options = {"Tak",
@@ -57,23 +54,20 @@ public class Main {
                     JOptionPane.ERROR_MESSAGE);
             System.exit(0);
         }
-        System.out.println(legendsData);
-        Container container = frame.getContentPane();
+
+        Container BtnsContainer = frame.getContentPane();
         frame.setLayout(new GridLayout(0, 3));
 
         for (Map.Entry<String, Legend> el : legendsData.entrySet()){
             try {
                 String path = el.getValue().getImage_src();
-                System.out.println("Get Image from " + path);
+                System.out.println("Pobieranie zdjęcia... URL: " + path);
                 URL url = new URL(path);
                 BufferedImage image = ImageIO.read(url);
-                System.out.println("Load image into frame...");
 
-                //test
+                //skalowanie
+                Image dimg = image.getScaledInstance(150, 150, Image.SCALE_SMOOTH);
 
-                Image dimg = image.getScaledInstance(150, 150,
-                        Image.SCALE_SMOOTH);
-                //
                 JButton btn = new JButton(new ImageIcon(dimg));
                 btn.setBackground(new Color(229, 225, 216));
 
@@ -86,6 +80,7 @@ public class Main {
                         JPanel imageContainer = new JPanel();
 
                         legendInfoContainer.setLayout(new GridLayout(0, 2));
+
                         dataContainer.setLayout(new GridLayout(0, 1));
                         ArrayList<JLabel> labels = new ArrayList<>();
 
@@ -114,13 +109,14 @@ public class Main {
 
                         legendFrame.add(legendInfoContainer);
                         legendFrame.setPreferredSize(new Dimension(800, 600));
+                        legendFrame.setMinimumSize(new Dimension(800, 600));
                         legendFrame.setBounds(100, 100, 800, 600);
                         legendFrame.pack();
                         legendFrame.setVisible(true);
                     }
                 });
 
-                container.add(btn);
+                BtnsContainer.add(btn);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -129,6 +125,5 @@ public class Main {
         frame.pack();
         frame.setVisible(true);
     }
-
 
 }

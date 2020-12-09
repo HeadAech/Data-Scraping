@@ -13,6 +13,8 @@ public class Data {
 
     private static Legend getLegendInfo(String name) throws IOException {
         Document legendPage = null;
+        System.out.println("Pobieranie danych... " );
+
         try{
             legendPage = Jsoup.connect("https://apexlegends.gamepedia.com/" + name).get();
         }
@@ -21,7 +23,7 @@ public class Data {
         }
         Element infobox = legendPage.getElementsByClass("infobox").first();
         String img = infobox.select("img").first().attr("src");
-        System.out.println(img);
+
         Elements rows = infobox.getElementsByClass("infobox-row");
 
         Map<String, String> legendInfo = new TreeMap<>();
@@ -32,6 +34,8 @@ public class Data {
             legendInfo.put(head, value);
         }
         legendInfo.put("Image Src", img);
+        System.out.println("Pobrano: " + legendInfo.toString());
+
         return new Legend(legendInfo.get("Nickname"),legendInfo.get("Real Name"), legendInfo.get("Gender"), legendInfo.get("Age"), legendInfo.get("Weight"), legendInfo.get("Height"), legendInfo.get("Legend Type"), legendInfo.get("Home World"), legendInfo.get("Image Src"));
     }
 
